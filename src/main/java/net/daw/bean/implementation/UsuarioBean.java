@@ -33,7 +33,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import net.daw.bean.publicinterface.GenericBean;
-import net.daw.dao.implementation.MedicoDao;
 import net.daw.dao.implementation.TipousuarioDao;
 import net.daw.helper.statics.EncodingUtilHelper;
 
@@ -51,6 +50,8 @@ public class UsuarioBean implements GenericBean {
     private String segundoapellido;
     @Expose
     private String login;
+    @Expose(serialize = false)
+    private String password;
     @Expose
     private String direccion;
     @Expose
@@ -74,9 +75,8 @@ public class UsuarioBean implements GenericBean {
     @Expose(serialize = false)
     private Integer id_medico = 0;
 
-    @Expose(deserialize = false)
-    private MedicoBean obj_medico = null;
-
+    /*@Expose(deserialize = false)
+    private MedicoBean obj_medico = null;*/
     public UsuarioBean() {
     }
 
@@ -130,6 +130,14 @@ public class UsuarioBean implements GenericBean {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getDireccion() {
@@ -212,13 +220,13 @@ public class UsuarioBean implements GenericBean {
         this.id_medico = id_medico;
     }
 
-    public MedicoBean getObj_medico() {
+    /*public MedicoBean getObj_medico() {
         return obj_medico;
     }
 
     public void setObj_medico(MedicoBean obj_medico) {
         this.obj_medico = obj_medico;
-    }
+    }*/
     @Override
     public String getColumns() {
         String strColumns = "";
@@ -227,7 +235,8 @@ public class UsuarioBean implements GenericBean {
         strColumns += "nombre,";
         strColumns += "primerapellido,";
         strColumns += "segundoapellido,";
-        strColumns += "login,";        
+        strColumns += "login,";
+        strColumns += "password,";
         strColumns += "direccion,";
         strColumns += "ciudad,";
         strColumns += "codigopostal,";
@@ -249,6 +258,7 @@ public class UsuarioBean implements GenericBean {
         strColumns += EncodingUtilHelper.quotate(primerapellido) + ",";
         strColumns += EncodingUtilHelper.quotate(segundoapellido) + ",";
         strColumns += EncodingUtilHelper.quotate(login) + ",";
+        strColumns += EncodingUtilHelper.quotate(password) + ",";
         strColumns += EncodingUtilHelper.quotate(direccion) + ",";
         strColumns += EncodingUtilHelper.quotate(ciudad) + ",";
         strColumns += EncodingUtilHelper.quotate(codigopostal) + ",";
@@ -269,6 +279,7 @@ public class UsuarioBean implements GenericBean {
         strPairs += "primerapellido=" + EncodingUtilHelper.quotate(primerapellido) + ",";
         strPairs += "segundoapellido=" + EncodingUtilHelper.quotate(segundoapellido) + ",";
         strPairs += "login=" + EncodingUtilHelper.quotate(login) + ",";
+        strPairs += "password=" + EncodingUtilHelper.quotate(password) + ",";
         strPairs += "direccion=" + EncodingUtilHelper.quotate(direccion) + ",";
         strPairs += "ciudad=" + EncodingUtilHelper.quotate(ciudad) + ",";
         strPairs += "codigopostal=" + EncodingUtilHelper.quotate(codigopostal) + ",";
@@ -282,13 +293,14 @@ public class UsuarioBean implements GenericBean {
     }
 
     @Override
-    public UsuarioBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception {
+    public UsuarioBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oPusuarioBean_security, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id"));
         this.setDni(oResultSet.getString("dni"));
         this.setNombre(oResultSet.getString("nombre"));
         this.setPrimerapellido(oResultSet.getString("primerapellido"));
         this.setSegundoapellido(oResultSet.getString("segundoapellido"));
         this.setLogin(oResultSet.getString("login"));
+        this.setPassword(oResultSet.getString("password"));
         this.setDireccion(oResultSet.getString("direccion"));
         this.setCiudad(oResultSet.getString("ciudad"));
         this.setCodigopostal(oResultSet.getString("codigopostal"));
@@ -299,7 +311,7 @@ public class UsuarioBean implements GenericBean {
 
         if (expand > 0) {
             TipousuarioBean oTipousuarioBean = new TipousuarioBean();
-            TipousuarioDao oTipousuarioDao = new TipousuarioDao(pooledConnection, oPuserBean_security, null);
+            TipousuarioDao oTipousuarioDao = new TipousuarioDao(pooledConnection, oPusuarioBean_security, null);
             oTipousuarioBean.setId(oResultSet.getInt("id_tipousuario"));
             oTipousuarioBean = oTipousuarioDao.get(oTipousuarioBean, expand - 1);
             this.setObj_tipousuario(oTipousuarioBean);
@@ -307,15 +319,16 @@ public class UsuarioBean implements GenericBean {
             this.setId_tipousuario(oResultSet.getInt("id_tipousuario"));
         }
 
-        if (expand > 0) {
+        /*if (expand > 0) {
             MedicoBean oMedicoBean = new MedicoBean();
-            MedicoDao oMedicoDao = new MedicoDao(pooledConnection, oPuserBean_security, null);
+            MedicoDao oMedicoDao = new MedicoDao(pooledConnection, oPusuarioBean_security, null);
             oMedicoBean.setId(oResultSet.getInt("id_medico"));
             oMedicoBean = oMedicoDao.get(oMedicoBean, expand - 1);
             this.setObj_medico(oMedicoBean);
         } else {
             this.setId_medico(oResultSet.getInt("id_medico"));
-        }
+        }*/
         return this;
     }
+
 }

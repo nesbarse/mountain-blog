@@ -46,9 +46,8 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.implementation.PosologiaBean;
-import net.daw.bean.implementation.PusuarioBean;
-import net.daw.bean.implementation.ReplyBean;
 import net.daw.bean.implementation.UsuarioBean;
+import net.daw.bean.implementation.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.dao.implementation.PosologiaDao;
 import net.daw.helper.statics.AppConfigurationHelper;
@@ -69,7 +68,7 @@ public class PosologiaService implements TableServiceInterface, ViewServiceInter
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPusuarioBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPusuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPusuarioBean != null) {
             return true;
         } else {
@@ -87,7 +86,7 @@ public class PosologiaService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oPosologiaDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -116,7 +115,7 @@ public class PosologiaService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 PosologiaBean oPosologiaBean = new PosologiaBean(id);
                 oPosologiaBean = oPosologiaDao.get(oPosologiaBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -149,7 +148,7 @@ public class PosologiaService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<PosologiaBean> arrBeans = oPosologiaDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -182,7 +181,7 @@ public class PosologiaService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<PosologiaBean> arrBeans = oPosologiaDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -213,7 +212,7 @@ public class PosologiaService implements TableServiceInterface, ViewServiceInter
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oPosologiaDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -247,7 +246,7 @@ public class PosologiaService implements TableServiceInterface, ViewServiceInter
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PosologiaDao oPosologiaDao = new PosologiaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 PosologiaBean oPosologiaBean = new PosologiaBean();
                 oPosologiaBean = AppConfigurationHelper.getGson().fromJson(jason, oPosologiaBean.getClass());
                 if (oPosologiaBean != null) {

@@ -91,7 +91,7 @@ public class TipousuarioBean implements GenericBean {
     }
 
     @Override
-    public TipousuarioBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception {
+    public TipousuarioBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id"));
         this.setDescription(oResultSet.getString("descripcion"));
         return this;

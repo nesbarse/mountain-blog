@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.bean.implementation.TipodiagnosticoBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
@@ -36,7 +36,7 @@ public class TipodiagnosticoService implements TableServiceInterface, ViewServic
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPuserBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPuserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPuserBean != null) {
             return true;
         } else {
@@ -55,7 +55,7 @@ public class TipodiagnosticoService implements TableServiceInterface, ViewServic
 
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oTipodiagnosticoDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -84,7 +84,7 @@ public class TipodiagnosticoService implements TableServiceInterface, ViewServic
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 TipodiagnosticoBean oTipodiagnosticoBean = new TipodiagnosticoBean(id);
                 oTipodiagnosticoBean = oTipodiagnosticoDao.get(oTipodiagnosticoBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -117,7 +117,7 @@ public class TipodiagnosticoService implements TableServiceInterface, ViewServic
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<TipodiagnosticoBean> arrBeans = oTipodiagnosticoDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -150,7 +150,7 @@ public class TipodiagnosticoService implements TableServiceInterface, ViewServic
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<TipodiagnosticoBean> arrBeans = oTipodiagnosticoDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -181,7 +181,7 @@ public class TipodiagnosticoService implements TableServiceInterface, ViewServic
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oTipodiagnosticoDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -215,7 +215,7 @@ public class TipodiagnosticoService implements TableServiceInterface, ViewServic
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                TipodiagnosticoDao oTipodiagnosticoDao = new TipodiagnosticoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 TipodiagnosticoBean oTipodiagnosticoBean = new TipodiagnosticoBean();
                 oTipodiagnosticoBean = AppConfigurationHelper.getGson().fromJson(jason, oTipodiagnosticoBean.getClass());
                 if (oTipodiagnosticoBean != null) {

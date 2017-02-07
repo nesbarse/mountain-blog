@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.bean.implementation.MedicoBean;
 import net.daw.dao.implementation.MedicoDao;
@@ -57,7 +57,7 @@ public class MedicoService implements TableServiceInterface, ViewServiceInterfac
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPusuarioBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPusuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPusuarioBean != null) {
             return true;
         } else {
@@ -75,7 +75,7 @@ public class MedicoService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                MedicoDao oMedicoDao = new MedicoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicoDao oMedicoDao = new MedicoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oMedicoDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -104,7 +104,7 @@ public class MedicoService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                MedicoDao oMedicoDao = new MedicoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicoDao oMedicoDao = new MedicoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 MedicoBean oMedicoBean = new MedicoBean(id);
                 oMedicoBean = oMedicoDao.get(oMedicoBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -137,7 +137,7 @@ public class MedicoService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                MedicoDao oMedicoDao = new MedicoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicoDao oMedicoDao = new MedicoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<MedicoBean> arrBeans = oMedicoDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -170,7 +170,7 @@ public class MedicoService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                MedicoDao oMedicoDao = new MedicoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicoDao oMedicoDao = new MedicoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<MedicoBean> arrBeans = oMedicoDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -201,7 +201,7 @@ public class MedicoService implements TableServiceInterface, ViewServiceInterfac
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                MedicoDao oMedicoDao = new MedicoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicoDao oMedicoDao = new MedicoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oMedicoDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -235,7 +235,7 @@ public class MedicoService implements TableServiceInterface, ViewServiceInterfac
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                MedicoDao oMedicoDao = new MedicoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicoDao oMedicoDao = new MedicoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 MedicoBean oMedicoBean = new MedicoBean();
                 oMedicoBean = AppConfigurationHelper.getGson().fromJson(jason, oMedicoBean.getClass());
                 if (oMedicoBean != null) {

@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.daw.bean.implementation.PruebaBean;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.dao.publicinterface.TableDaoInterface;
 import net.daw.dao.publicinterface.ViewDaoInterface;
 import net.daw.data.implementation.MysqlData;
@@ -19,9 +19,9 @@ public class PruebaDao implements ViewDaoInterface<PruebaBean>, TableDaoInterfac
     private String strSQL = "select * from prueba where 1=1 ";
     private MysqlData oMysql = null;
     private Connection oConnection = null;
-    private PusuarioBean oPuserSecurity = null;
+    private UsuarioBean oPuserSecurity = null;
 
-    public PruebaDao(Connection oPooledConnection, PusuarioBean oPuserBean_security, String strWhere) throws Exception {
+    public PruebaDao(Connection oPooledConnection, UsuarioBean oPuserBean_security, String strWhere) throws Exception {
         try {
             oConnection = oPooledConnection;
             oMysql = new MysqlData(oConnection);

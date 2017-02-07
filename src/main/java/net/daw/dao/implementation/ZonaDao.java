@@ -32,7 +32,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ZonaBean;
 import net.daw.dao.publicinterface.TableDaoInterface;
 import net.daw.dao.publicinterface.ViewDaoInterface;
@@ -49,9 +49,9 @@ public class ZonaDao implements ViewDaoInterface<ZonaBean>, TableDaoInterface<Zo
     private String strSQL = "select * from zona where 1=1 ";
     private MysqlData oMysql = null;
     private Connection oConnection = null;
-    private PusuarioBean oPuserSecurity = null;
+    private UsuarioBean oPuserSecurity = null;
 
-    public ZonaDao(Connection oPooledConnection, PusuarioBean oPuserBean_security, String strWhere) throws Exception {
+    public ZonaDao(Connection oPooledConnection, UsuarioBean oPuserBean_security, String strWhere) throws Exception {
         try {
             oConnection = oPooledConnection;
             oMysql = new MysqlData(oConnection);

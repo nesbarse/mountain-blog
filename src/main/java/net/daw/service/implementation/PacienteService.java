@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.bean.implementation.PacienteBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
@@ -36,7 +36,7 @@ public class PacienteService implements TableServiceInterface, ViewServiceInterf
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPuserBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPuserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPuserBean != null) {
             return true;
         } else {
@@ -55,7 +55,7 @@ public class PacienteService implements TableServiceInterface, ViewServiceInterf
 
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PacienteDao oPacienteDao = new PacienteDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PacienteDao oPacienteDao = new PacienteDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oPacienteDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -84,7 +84,7 @@ public class PacienteService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PacienteDao oPacienteDao = new PacienteDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PacienteDao oPacienteDao = new PacienteDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 PacienteBean oPacienteBean = new PacienteBean(id);
                 oPacienteBean = oPacienteDao.get(oPacienteBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -117,7 +117,7 @@ public class PacienteService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PacienteDao oPacienteDao = new PacienteDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PacienteDao oPacienteDao = new PacienteDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<PacienteBean> arrBeans = oPacienteDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -150,7 +150,7 @@ public class PacienteService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PacienteDao oPacienteDao = new PacienteDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PacienteDao oPacienteDao = new PacienteDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<PacienteBean> arrBeans = oPacienteDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -181,7 +181,7 @@ public class PacienteService implements TableServiceInterface, ViewServiceInterf
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                PacienteDao oPacienteDao = new PacienteDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PacienteDao oPacienteDao = new PacienteDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oPacienteDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -215,7 +215,7 @@ public class PacienteService implements TableServiceInterface, ViewServiceInterf
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                PacienteDao oPacienteDao = new PacienteDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PacienteDao oPacienteDao = new PacienteDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 PacienteBean oPacienteBean = new PacienteBean();
                 oPacienteBean = AppConfigurationHelper.getGson().fromJson(jason, oPacienteBean.getClass());
                 if (oPacienteBean != null) {

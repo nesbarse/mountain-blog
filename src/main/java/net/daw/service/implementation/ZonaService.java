@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.bean.implementation.ZonaBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
@@ -59,7 +59,7 @@ public class ZonaService implements TableServiceInterface, ViewServiceInterface 
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPusuarioBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPusuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPusuarioBean != null) {
             return true;
         } else {
@@ -78,7 +78,7 @@ public class ZonaService implements TableServiceInterface, ViewServiceInterface 
 
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ZonaDao oZonaDao = new ZonaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ZonaDao oZonaDao = new ZonaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oZonaDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -107,7 +107,7 @@ public class ZonaService implements TableServiceInterface, ViewServiceInterface 
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ZonaDao oZonaDao = new ZonaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ZonaDao oZonaDao = new ZonaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ZonaBean oZonaBean = new ZonaBean(id);
                 oZonaBean = oZonaDao.get(oZonaBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -140,7 +140,7 @@ public class ZonaService implements TableServiceInterface, ViewServiceInterface 
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ZonaDao oZonaDao = new ZonaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ZonaDao oZonaDao = new ZonaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<ZonaBean> arrBeans = oZonaDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -173,7 +173,7 @@ public class ZonaService implements TableServiceInterface, ViewServiceInterface 
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ZonaDao oZonaDao = new ZonaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ZonaDao oZonaDao = new ZonaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<ZonaBean> arrBeans = oZonaDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -204,7 +204,7 @@ public class ZonaService implements TableServiceInterface, ViewServiceInterface 
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                ZonaDao oZonaDao = new ZonaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ZonaDao oZonaDao = new ZonaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oZonaDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -238,7 +238,7 @@ public class ZonaService implements TableServiceInterface, ViewServiceInterface 
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                ZonaDao oZonaDao = new ZonaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ZonaDao oZonaDao = new ZonaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ZonaBean oZonaBean = new ZonaBean();
                 oZonaBean = AppConfigurationHelper.getGson().fromJson(jason, oZonaBean.getClass());
                 if (oZonaBean != null) {

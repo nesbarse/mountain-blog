@@ -31,7 +31,7 @@ package net.daw.bean.publicinterface;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 
 public interface GenericBean {
 
@@ -41,5 +41,5 @@ public interface GenericBean {
 
     public String toPairs();
 
-    public GenericBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception;
+    public GenericBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception;
 }

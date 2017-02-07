@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.implementation.CargoBean;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.dao.implementation.CargoDao;
@@ -58,7 +58,7 @@ public class CargoService implements TableServiceInterface, ViewServiceInterface
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPusuarioBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPusuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPusuarioBean != null) {
             return true;
         } else {
@@ -76,7 +76,7 @@ public class CargoService implements TableServiceInterface, ViewServiceInterface
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                DiagnosticoDao oDiagnosticoDao = new DiagnosticoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                DiagnosticoDao oDiagnosticoDao = new DiagnosticoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oDiagnosticoDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -105,7 +105,7 @@ public class CargoService implements TableServiceInterface, ViewServiceInterface
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CargoDao oCargoDao = new CargoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                CargoDao oCargoDao = new CargoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 CargoBean oCargoBean = new CargoBean(id);
                 oCargoBean = oCargoDao.get(oCargoBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -138,7 +138,7 @@ public class CargoService implements TableServiceInterface, ViewServiceInterface
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CargoDao oCargoDao = new CargoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                CargoDao oCargoDao = new CargoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<CargoBean> arrCargo = oCargoDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrCargo));
             } catch (Exception ex) {
@@ -171,7 +171,7 @@ public class CargoService implements TableServiceInterface, ViewServiceInterface
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                CargoDao oCargoDao = new CargoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                CargoDao oCargoDao = new CargoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<CargoBean> arrCargo = oCargoDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrCargo));
             } catch (Exception ex) {
@@ -202,7 +202,7 @@ public class CargoService implements TableServiceInterface, ViewServiceInterface
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                CargoDao oCargoDao = new CargoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                CargoDao oCargoDao = new CargoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oCargoDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -236,7 +236,7 @@ public class CargoService implements TableServiceInterface, ViewServiceInterface
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                CargoDao oCargoDao = new CargoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                CargoDao oCargoDao = new CargoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 CargoBean oCargoBean = new CargoBean();
                 oCargoBean = AppConfigurationHelper.getGson().fromJson(jason, oCargoBean.getClass());
                 if (oCargoBean != null) {

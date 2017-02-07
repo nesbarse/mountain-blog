@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ServicioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
@@ -57,7 +57,7 @@ public class ServicioService implements TableServiceInterface, ViewServiceInterf
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPusuarioBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPusuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPusuarioBean != null) {
             return true;
         } else {
@@ -75,7 +75,7 @@ public class ServicioService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ServicioDao oServicioDao = new ServicioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ServicioDao oServicioDao = new ServicioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oServicioDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -104,7 +104,7 @@ public class ServicioService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ServicioDao oServicioDao = new ServicioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ServicioDao oServicioDao = new ServicioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ServicioBean oServicioBean = new ServicioBean(id);
                 oServicioBean = oServicioDao.get(oServicioBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -137,7 +137,7 @@ public class ServicioService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ServicioDao oServicioDao = new ServicioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ServicioDao oServicioDao = new ServicioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<ServicioBean> arrBeans = oServicioDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -170,7 +170,7 @@ public class ServicioService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ServicioDao oServicioDao = new ServicioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ServicioDao oServicioDao = new ServicioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<ServicioBean> arrBeans = oServicioDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -201,7 +201,7 @@ public class ServicioService implements TableServiceInterface, ViewServiceInterf
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                ServicioDao oServicioDao = new ServicioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ServicioDao oServicioDao = new ServicioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oServicioDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -235,7 +235,7 @@ public class ServicioService implements TableServiceInterface, ViewServiceInterf
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                ServicioDao oServicioDao = new ServicioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ServicioDao oServicioDao = new ServicioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ServicioBean oServicioBean = new ServicioBean();
                 oServicioBean = AppConfigurationHelper.getGson().fromJson(jason, oServicioBean.getClass());
                 if (oServicioBean != null) {

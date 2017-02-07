@@ -29,7 +29,7 @@
 package net.daw.service.implementation;
 
 import javax.servlet.http.HttpServletRequest;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.bean.implementation.UsuarioBean;
 import net.daw.helper.statics.EncodingUtilHelper;
@@ -49,7 +49,7 @@ public class DebugService implements ViewServiceInterface {
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPuserBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPuserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPuserBean != null) {
             return true;
         } else {

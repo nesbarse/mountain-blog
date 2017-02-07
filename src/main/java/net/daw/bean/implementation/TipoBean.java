@@ -68,7 +68,7 @@ public class TipoBean implements GenericBean{
     }
 
     @Override
-    public TipoBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception {
+    public TipoBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception {
         
         this.id = oResultSet.getInt("id");
         this.descripcion = oResultSet.getString("descripcion");

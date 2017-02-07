@@ -124,7 +124,7 @@ public class ZonaimagenBean implements GenericBean {
     }
 
     @Override
-    public ZonaimagenBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oUsuarioBean_security, Integer expand) throws SQLException, Exception {
+    public ZonaimagenBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oUsuarioBean_security, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id"));
         if (expand > 0) {
             ZonaBean oZonaBean = new ZonaBean();

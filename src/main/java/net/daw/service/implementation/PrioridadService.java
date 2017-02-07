@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.implementation.PrioridadBean;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.dao.implementation.PrioridadDao;
@@ -57,7 +57,7 @@ public class PrioridadService implements TableServiceInterface, ViewServiceInter
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPusuarioBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPusuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPusuarioBean != null) {
             return true;
         } else {
@@ -75,7 +75,7 @@ public class PrioridadService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oPrioridadDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -104,7 +104,7 @@ public class PrioridadService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 PrioridadBean oPrioridadBean = new PrioridadBean(id);
                 oPrioridadBean = oPrioridadDao.get(oPrioridadBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -137,7 +137,7 @@ public class PrioridadService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<PrioridadBean> arrBeans = oPrioridadDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -170,7 +170,7 @@ public class PrioridadService implements TableServiceInterface, ViewServiceInter
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<PrioridadBean> arrBeans = oPrioridadDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -201,7 +201,7 @@ public class PrioridadService implements TableServiceInterface, ViewServiceInter
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oPrioridadDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -235,7 +235,7 @@ public class PrioridadService implements TableServiceInterface, ViewServiceInter
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PrioridadDao oPrioridadDao = new PrioridadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 PrioridadBean oPrioridadBean = new PrioridadBean();
                 oPrioridadBean = AppConfigurationHelper.getGson().fromJson(jason, oPrioridadBean.getClass());
                 if (oPrioridadBean != null) {

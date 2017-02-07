@@ -33,7 +33,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.daw.bean.implementation.MedicoBean;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.dao.publicinterface.TableDaoInterface;
 import net.daw.dao.publicinterface.ViewDaoInterface;
 import net.daw.data.implementation.MysqlData;
@@ -48,9 +48,9 @@ public class MedicoDao implements ViewDaoInterface<MedicoBean>, TableDaoInterfac
     private String strSQL = "select * from medico where 1=1 ";
     private MysqlData oMysql = null;
     private Connection oConnection = null;
-    private PusuarioBean oPusuarioSecurity = null;
+    private UsuarioBean oPusuarioSecurity = null;
 
-    public MedicoDao(Connection oPooledConnection, PusuarioBean oUserBean_security, String strWhere) throws Exception {
+    public MedicoDao(Connection oPooledConnection, UsuarioBean oUserBean_security, String strWhere) throws Exception {
         try {
             oConnection = oPooledConnection;
             oMysql = new MysqlData(oConnection);

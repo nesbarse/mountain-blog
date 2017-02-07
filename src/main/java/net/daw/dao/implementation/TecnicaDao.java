@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.TecnicaBean;
 import net.daw.dao.publicinterface.TableDaoInterface;
 import net.daw.dao.publicinterface.ViewDaoInterface;
@@ -28,9 +28,9 @@ public class TecnicaDao implements ViewDaoInterface<TecnicaBean>, TableDaoInterf
     private String strSQL = "select * from tecnica where 1=1 ";
     private MysqlData oMysql = null;
     private Connection oConnection = null;
-    private PusuarioBean oPusuarioSecurity = null;
+    private UsuarioBean oPusuarioSecurity = null;
 
-    public TecnicaDao(Connection oPooledConnection, PusuarioBean oPusuarioBean_security, String strWhere) throws Exception {
+    public TecnicaDao(Connection oPooledConnection, UsuarioBean oPusuarioBean_security, String strWhere) throws Exception {
         try {
             oConnection = oPooledConnection;
             oMysql = new MysqlData(oConnection);

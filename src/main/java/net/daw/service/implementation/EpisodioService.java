@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.implementation.EpisodioBean;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.dao.implementation.EpisodioDao;
@@ -57,7 +57,7 @@ public class EpisodioService implements TableServiceInterface, ViewServiceInterf
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPusuarioBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPusuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
 
         return oPusuarioBean != null;
 
@@ -73,7 +73,7 @@ public class EpisodioService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oEpisodioDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -102,7 +102,7 @@ public class EpisodioService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 EpisodioBean oEpisodioBean = new EpisodioBean(id);
                 oEpisodioBean = oEpisodioDao.get(oEpisodioBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -135,7 +135,7 @@ public class EpisodioService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<EpisodioBean> arrBeans = oEpisodioDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -168,7 +168,7 @@ public class EpisodioService implements TableServiceInterface, ViewServiceInterf
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<EpisodioBean> arrBeans = oEpisodioDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -199,7 +199,7 @@ public class EpisodioService implements TableServiceInterface, ViewServiceInterf
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oEpisodioDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -233,7 +233,7 @@ public class EpisodioService implements TableServiceInterface, ViewServiceInterf
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                EpisodioDao oEpisodioDao = new EpisodioDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 EpisodioBean oEpisodioBean = new EpisodioBean();
                 oEpisodioBean = AppConfigurationHelper.getGson().fromJson(jason, oEpisodioBean.getClass());
                 if (oEpisodioBean != null) {

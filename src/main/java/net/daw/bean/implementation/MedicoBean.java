@@ -127,7 +127,7 @@ public class MedicoBean implements GenericBean {
     }
 
     @Override
-    public MedicoBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oPusuarioBean_security, Integer expand) throws SQLException, Exception {
+    public MedicoBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oPusuarioBean_security, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id"));
         if (expand > 0) {
             ServicioBean oServicioBean = new ServicioBean();

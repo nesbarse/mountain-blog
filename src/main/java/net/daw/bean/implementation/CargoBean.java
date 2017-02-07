@@ -96,7 +96,7 @@ public class CargoBean implements GenericBean {
     }
 
     @Override
-    public CargoBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oPusuarioBean_security, Integer expand) throws SQLException, Exception {
+    public CargoBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oPusuarioBean_security, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id"));
         this.setFecha(oResultSet.getTimestamp("date"));
 

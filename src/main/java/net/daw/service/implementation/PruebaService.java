@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.implementation.PruebaBean;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.dao.implementation.PruebaDao;
@@ -57,7 +57,7 @@ public class PruebaService implements TableServiceInterface, ViewServiceInterfac
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPuserBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPuserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPuserBean != null) {
             return true;
         } else {
@@ -75,7 +75,7 @@ public class PruebaService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PruebaDao oDocumentDao = new PruebaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PruebaDao oDocumentDao = new PruebaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oDocumentDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -104,7 +104,7 @@ public class PruebaService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PruebaDao oDocumentDao = new PruebaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PruebaDao oDocumentDao = new PruebaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 PruebaBean oDocumentBean = new PruebaBean(id);
                 oDocumentBean = oDocumentDao.get(oDocumentBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -137,7 +137,7 @@ public class PruebaService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PruebaDao oDocumentDao = new PruebaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PruebaDao oDocumentDao = new PruebaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<PruebaBean> arrBeans = oDocumentDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -170,7 +170,7 @@ public class PruebaService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                PruebaDao oDocumentDao = new PruebaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PruebaDao oDocumentDao = new PruebaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<PruebaBean> arrBeans = oDocumentDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -201,7 +201,7 @@ public class PruebaService implements TableServiceInterface, ViewServiceInterfac
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                PruebaDao oDocumentDao = new PruebaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PruebaDao oDocumentDao = new PruebaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oDocumentDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -235,7 +235,7 @@ public class PruebaService implements TableServiceInterface, ViewServiceInterfac
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                PruebaDao oPruebaDao = new PruebaDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                PruebaDao oPruebaDao = new PruebaDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 PruebaBean oPruebaBean = new PruebaBean();
                 oPruebaBean = AppConfigurationHelper.getGson().fromJson(jason, oPruebaBean.getClass());
                 if (oPruebaBean != null) {

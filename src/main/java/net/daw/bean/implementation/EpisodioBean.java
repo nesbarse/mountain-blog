@@ -269,7 +269,7 @@ public class EpisodioBean implements GenericBean {
     }
 
     @Override
-    public EpisodioBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception {
+    public EpisodioBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception {
         this.id = oResultSet.getInt("id");
         this.fecha = oResultSet.getTimestamp("fecha");
         this.informe = oResultSet.getString("informe");

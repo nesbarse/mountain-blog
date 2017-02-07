@@ -77,7 +77,7 @@ public class TecnicaBean implements GenericBean{
     }
 
     @Override
-    public TecnicaBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception {
+    public TecnicaBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oPuserBean_security, Integer expand) throws SQLException, Exception {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     
         this.setId(oResultSet.getInt("id"));

@@ -35,7 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.implementation.EspecialidadBean;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
 import net.daw.dao.implementation.EspecialidadDao;
@@ -57,7 +57,7 @@ public class EspecialidadService implements TableServiceInterface, ViewServiceIn
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPusuarioBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPusuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPusuarioBean != null) {
             return true;
         } else {
@@ -75,7 +75,7 @@ public class EspecialidadService implements TableServiceInterface, ViewServiceIn
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"),null);
+                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"),null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oEspecialidadDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -104,7 +104,7 @@ public class EspecialidadService implements TableServiceInterface, ViewServiceIn
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"),null);
+                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"),null);
                 EspecialidadBean oEspecialidadBean = new EspecialidadBean(id);
                 oEspecialidadBean = oEspecialidadDao.get(oEspecialidadBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -137,7 +137,7 @@ public class EspecialidadService implements TableServiceInterface, ViewServiceIn
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"),null);
+                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"),null);
                 ArrayList<EspecialidadBean> arrBeans = oEspecialidadDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -170,7 +170,7 @@ public class EspecialidadService implements TableServiceInterface, ViewServiceIn
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"),null);
+                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"),null);
                 List<EspecialidadBean> arrBeans = oEspecialidadDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -201,7 +201,7 @@ public class EspecialidadService implements TableServiceInterface, ViewServiceIn
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"),null);
+                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"),null);
                 data = JsonMessage.getJsonExpression(200, (String) oEspecialidadDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -235,7 +235,7 @@ public class EspecialidadService implements TableServiceInterface, ViewServiceIn
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"),null);
+                EspecialidadDao oEspecialidadDao = new EspecialidadDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"),null);
                 EspecialidadBean oEspecialidadBean = new EspecialidadBean();
                 oEspecialidadBean = AppConfigurationHelper.getGson().fromJson(jason, oEspecialidadBean.getClass());
                 if (oEspecialidadBean != null) {

@@ -32,7 +32,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.TipousuarioBean;
 import net.daw.dao.publicinterface.TableDaoInterface;
 import net.daw.dao.publicinterface.ViewDaoInterface;
@@ -47,9 +47,9 @@ public class TipousuarioDao implements ViewDaoInterface<TipousuarioBean>, TableD
     private String strSQL = "select * from tipousuario where 1=1 ";
     private MysqlData oMysql = null;
     private Connection oConnection = null;
-    private PusuarioBean oPuserSecurity = null;
+    private UsuarioBean oPuserSecurity = null;
 
-    public TipousuarioDao(Connection oPooledConnection, PusuarioBean oPuserBean_security, String strWhere) throws Exception {
+    public TipousuarioDao(Connection oPooledConnection, UsuarioBean oPuserBean_security, String strWhere) throws Exception {
         try {
             oConnection = oPooledConnection;
             oMysql = new MysqlData(oConnection);

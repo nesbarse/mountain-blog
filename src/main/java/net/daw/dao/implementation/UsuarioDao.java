@@ -32,7 +32,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import net.daw.bean.implementation.PusuarioBean;
 import net.daw.bean.implementation.UsuarioBean;
 import net.daw.dao.publicinterface.TableDaoInterface;
 import net.daw.dao.publicinterface.ViewDaoInterface;
@@ -46,12 +45,12 @@ import net.daw.helper.statics.SqlBuilder;
 public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterface<UsuarioBean> {
 
     private String strTable = "usuario";
-    private String strSQL = "select * from usuario where 1=1 ";
+    private String strSQL = "select * from " + strTable + " where 1=1 ";
     private MysqlData oMysql = null;
     private Connection oConnection = null;
-    private PusuarioBean oPuserSecurity = null;
+    private UsuarioBean oPuserSecurity = null;
 
-    public UsuarioDao(Connection oPooledConnection, PusuarioBean oPuserBean_security, String strWhere) throws Exception {
+    public UsuarioDao(Connection oPooledConnection, UsuarioBean oPuserBean_security, String strWhere) throws Exception {
         try {
             oConnection = oPooledConnection;
             oMysql = new MysqlData(oConnection);
@@ -190,7 +189,7 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         return result;
     }
 
-    public PusuarioBean getFromLogin(PusuarioBean oPuser) throws Exception {
+    public UsuarioBean getFromLogin(UsuarioBean oPuser) throws Exception {
         try {
             String strId = oMysql.getId(strTable, "login", oPuser.getLogin());
             if (strId == null) {
@@ -212,14 +211,14 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         }
     }
 
-    public PusuarioBean getP(PusuarioBean oPuserBean, Integer expand) throws Exception {
+    public UsuarioBean getP(UsuarioBean oPuserBean, Integer expand) throws Exception {
         if (oPuserBean.getId() > 0) {
             ResultSet oResultSet = null;
             try {
                 oResultSet = oMysql.getAllSQL(strSQL + " And id= " + oPuserBean.getId() + " ");
                 Boolean empty = true;
                 while (oResultSet.next()) {
-                    oPuserBean = (PusuarioBean) oPuserBean.fill(oResultSet, oConnection, oPuserSecurity, expand);
+                    oPuserBean = (UsuarioBean) oPuserBean.fill(oResultSet, oConnection, oPuserSecurity, expand);
                     empty = false;
                 }
                 if (empty) {
@@ -239,7 +238,7 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         return oPuserBean;
     }
 
-    public Integer setP(PusuarioBean oPuserBean) throws Exception {
+    public Integer setP(UsuarioBean oPuserBean) throws Exception {
         //only 4 fill service
         Integer iResult = null;
         try {
@@ -264,7 +263,7 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
     public Integer passchange(String oldPassword, String newPassword) throws Exception {
         Integer iResult = null;
         try {
-            strSQL = "UPDATE user";
+            strSQL = "UPDATE " + strTable + " ";
             strSQL += " SET password = " + EncodingUtilHelper.quotate(newPassword);
             strSQL += " WHERE id=" + oPuserSecurity.getId();
             strSQL += " and password=" + EncodingUtilHelper.quotate(oldPassword);
@@ -275,4 +274,5 @@ public class UsuarioDao implements ViewDaoInterface<UsuarioBean>, TableDaoInterf
         }
         return iResult;
     }
+
 }

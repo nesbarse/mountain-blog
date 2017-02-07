@@ -35,7 +35,6 @@ import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import net.daw.bean.implementation.ImagenBean;
-import net.daw.bean.implementation.PusuarioBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.bean.implementation.UsuarioBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
@@ -58,7 +57,7 @@ public class ImagenService implements TableServiceInterface, ViewServiceInterfac
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPuserBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPuserBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPuserBean != null) {
             return true;
         } else {
@@ -76,7 +75,7 @@ public class ImagenService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ImagenDao oImagenDao = new ImagenDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ImagenDao oImagenDao = new ImagenDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oImagenDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -105,7 +104,7 @@ public class ImagenService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ImagenDao oImagenDao = new ImagenDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ImagenDao oImagenDao = new ImagenDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ImagenBean oImagenBean = new ImagenBean(id);
                 oImagenBean = oImagenDao.get(oImagenBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -138,7 +137,7 @@ public class ImagenService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ImagenDao oImagenDao = new ImagenDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ImagenDao oImagenDao = new ImagenDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<ImagenBean> arrBeans = oImagenDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -171,7 +170,7 @@ public class ImagenService implements TableServiceInterface, ViewServiceInterfac
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                ImagenDao oImagenDao = new ImagenDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ImagenDao oImagenDao = new ImagenDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<ImagenBean> arrBeans = oImagenDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -202,7 +201,7 @@ public class ImagenService implements TableServiceInterface, ViewServiceInterfac
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                ImagenDao oImagenDao = new ImagenDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ImagenDao oImagenDao = new ImagenDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oImagenDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -236,7 +235,7 @@ public class ImagenService implements TableServiceInterface, ViewServiceInterfac
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                ImagenDao oImagenDao = new ImagenDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                ImagenDao oImagenDao = new ImagenDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ImagenBean oImagenBean = new ImagenBean();
                 
                 

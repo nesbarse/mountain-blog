@@ -124,7 +124,7 @@ public class PruebaBean implements GenericBean {
     }
 
     @Override
-    public GenericBean fill(ResultSet oResultSet, Connection pooledConnection, PusuarioBean oPusuarioBean_security, Integer expand) throws SQLException, Exception {
+    public GenericBean fill(ResultSet oResultSet, Connection pooledConnection, UsuarioBean oPusuarioBean_security, Integer expand) throws SQLException, Exception {
         this.setId(oResultSet.getInt("id"));
         this.setInforme(oResultSet.getString("informe"));
         this.setFechaPeticion(oResultSet.getTimestamp("fecha_peticion"));

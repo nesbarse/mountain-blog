@@ -34,7 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import net.daw.bean.implementation.PusuarioBean;
+import net.daw.bean.implementation.UsuarioBean;
 import net.daw.bean.implementation.MedicamentoBean;
 import net.daw.bean.implementation.ReplyBean;
 import net.daw.connection.publicinterface.ConnectionInterface;
@@ -57,7 +57,7 @@ public class MedicamentoService implements TableServiceInterface, ViewServiceInt
     }
 
     private Boolean checkpermission(String strMethodName) throws Exception {
-        PusuarioBean oPusuarioBean = (PusuarioBean) oRequest.getSession().getAttribute("userBean");
+        UsuarioBean oPusuarioBean = (UsuarioBean) oRequest.getSession().getAttribute("userBean");
         if (oPusuarioBean != null) {
             return true;
         } else {
@@ -75,7 +75,7 @@ public class MedicamentoService implements TableServiceInterface, ViewServiceInt
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, Long.toString(oMedicamentoDao.getCount(alFilter)));
             } catch (Exception ex) {
                 Log4j.errorLog(this.getClass().getName() + ":" + (ex.getStackTrace()[0]).getMethodName(), ex);
@@ -104,7 +104,7 @@ public class MedicamentoService implements TableServiceInterface, ViewServiceInt
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 MedicamentoBean oMedicamentoBean = new MedicamentoBean(id);
                 oMedicamentoBean = oMedicamentoDao.get(oMedicamentoBean, AppConfigurationHelper.getJsonMsgDepth());
                 Gson gson = AppConfigurationHelper.getGson();
@@ -137,7 +137,7 @@ public class MedicamentoService implements TableServiceInterface, ViewServiceInt
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 ArrayList<MedicamentoBean> arrBeans = oMedicamentoDao.getAll(alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -170,7 +170,7 @@ public class MedicamentoService implements TableServiceInterface, ViewServiceInt
             try {
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
-                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 List<MedicamentoBean> arrBeans = oMedicamentoDao.getPage(intRegsPerPag, intPage, alFilter, hmOrder, AppConfigurationHelper.getJsonMsgDepth());
                 data = JsonMessage.getJsonExpression(200, AppConfigurationHelper.getGson().toJson(arrBeans));
             } catch (Exception ex) {
@@ -201,7 +201,7 @@ public class MedicamentoService implements TableServiceInterface, ViewServiceInt
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 data = JsonMessage.getJsonExpression(200, (String) oMedicamentoDao.remove(id).toString());
                 oConnection.commit();
             } catch (Exception ex) {
@@ -235,7 +235,7 @@ public class MedicamentoService implements TableServiceInterface, ViewServiceInt
                 oDataConnectionSource = getSourceConnection();
                 oConnection = oDataConnectionSource.newConnection();
                 oConnection.setAutoCommit(false);
-                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (PusuarioBean) oRequest.getSession().getAttribute("userBean"), null);
+                MedicamentoDao oMedicamentoDao = new MedicamentoDao(oConnection, (UsuarioBean) oRequest.getSession().getAttribute("userBean"), null);
                 MedicamentoBean oMedicamentoBean = new MedicamentoBean();
                 oMedicamentoBean = AppConfigurationHelper.getGson().fromJson(jason, oMedicamentoBean.getClass());
                 if (oMedicamentoBean != null) {
