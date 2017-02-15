@@ -45,9 +45,9 @@ public class UsuarioBean implements GenericBean {
     @Expose
     private String nombre;
     @Expose
-    private String primerapellido;
+    private String apellido1;
     @Expose
-    private String segundoapellido;
+    private String apellido2;
     @Expose
     private String login;
     @Expose(serialize = false)
@@ -57,7 +57,7 @@ public class UsuarioBean implements GenericBean {
     @Expose
     private String ciudad;
     @Expose
-    private String codigopostal;
+    private String codigo_postal;
     @Expose
     private String provincia;
     @Expose
@@ -109,19 +109,19 @@ public class UsuarioBean implements GenericBean {
     }
 
     public String getPrimerapellido() {
-        return primerapellido;
+        return apellido1;
     }
 
     public void setPrimerapellido(String primerapellido) {
-        this.primerapellido = primerapellido;
+        this.apellido1 = primerapellido;
     }
 
     public String getSegundoapellido() {
-        return segundoapellido;
+        return apellido2;
     }
 
     public void setSegundoapellido(String segundoapellido) {
-        this.segundoapellido = segundoapellido;
+        this.apellido2 = segundoapellido;
     }
 
     public String getLogin() {
@@ -157,11 +157,11 @@ public class UsuarioBean implements GenericBean {
     }
 
     public String getCodigopostal() {
-        return codigopostal;
+        return codigo_postal;
     }
 
     public void setCodigopostal(String codigopostal) {
-        this.codigopostal = codigopostal;
+        this.codigo_postal = codigopostal;
     }
 
     public String getProvincia() {
@@ -212,13 +212,13 @@ public class UsuarioBean implements GenericBean {
         this.obj_tipousuario = obj_tipousuario;
     }
 
-    public Integer getId_medico() {
-        return id_medico;
-    }
-
-    public void setId_medico(Integer id_medico) {
-        this.id_medico = id_medico;
-    }
+//    public Integer getId_medico() {
+//        return id_medico;
+//    }
+//
+//    public void setId_medico(Integer id_medico) {
+//        this.id_medico = id_medico;
+//    }
 
     /*public MedicoBean getObj_medico() {
         return obj_medico;
@@ -233,19 +233,19 @@ public class UsuarioBean implements GenericBean {
         strColumns += "id,";
         strColumns += "dni,";
         strColumns += "nombre,";
-        strColumns += "primerapellido,";
-        strColumns += "segundoapellido,";
+        strColumns += "apellido1,";
+        strColumns += "apellido2,";
         strColumns += "login,";
         strColumns += "password,";
         strColumns += "direccion,";
         strColumns += "ciudad,";
-        strColumns += "codigopostal,";
+        strColumns += "codigo_postal,";
         strColumns += "provincia,";
         strColumns += "pais,";
         strColumns += "email,";
         strColumns += "telefono,";
-        strColumns += "id_tipousuario,";
-        strColumns += "id_medico";
+        strColumns += "id_tipousuario";
+//        strColumns += "id_medico";
         return strColumns;
     }
 
@@ -255,19 +255,19 @@ public class UsuarioBean implements GenericBean {
         strColumns += id + ",";
         strColumns += EncodingUtilHelper.quotate(dni) + ",";
         strColumns += EncodingUtilHelper.quotate(nombre) + ",";
-        strColumns += EncodingUtilHelper.quotate(primerapellido) + ",";
-        strColumns += EncodingUtilHelper.quotate(segundoapellido) + ",";
+        strColumns += EncodingUtilHelper.quotate(apellido1) + ",";
+        strColumns += EncodingUtilHelper.quotate(apellido2) + ",";
         strColumns += EncodingUtilHelper.quotate(login) + ",";
         strColumns += EncodingUtilHelper.quotate(password) + ",";
         strColumns += EncodingUtilHelper.quotate(direccion) + ",";
         strColumns += EncodingUtilHelper.quotate(ciudad) + ",";
-        strColumns += EncodingUtilHelper.quotate(codigopostal) + ",";
+        strColumns += EncodingUtilHelper.quotate(codigo_postal) + ",";
         strColumns += EncodingUtilHelper.quotate(provincia) + ",";
         strColumns += EncodingUtilHelper.quotate(pais) + ",";
         strColumns += EncodingUtilHelper.quotate(email) + ",";
         strColumns += EncodingUtilHelper.quotate(telefono) + ",";
-        strColumns += id_tipousuario + ",";
-        strColumns += id_medico;
+        strColumns += id_tipousuario;
+//        strColumns += id_medico;
         return strColumns;
     }
 
@@ -276,19 +276,19 @@ public class UsuarioBean implements GenericBean {
         String strPairs = "";
         strPairs += "dni=" + EncodingUtilHelper.quotate(dni) + ",";
         strPairs += "nombre=" + EncodingUtilHelper.quotate(nombre) + ",";
-        strPairs += "primerapellido=" + EncodingUtilHelper.quotate(primerapellido) + ",";
-        strPairs += "segundoapellido=" + EncodingUtilHelper.quotate(segundoapellido) + ",";
+        strPairs += "primerapellido=" + EncodingUtilHelper.quotate(apellido1) + ",";
+        strPairs += "segundoapellido=" + EncodingUtilHelper.quotate(apellido2) + ",";
         strPairs += "login=" + EncodingUtilHelper.quotate(login) + ",";
         strPairs += "password=" + EncodingUtilHelper.quotate(password) + ",";
         strPairs += "direccion=" + EncodingUtilHelper.quotate(direccion) + ",";
         strPairs += "ciudad=" + EncodingUtilHelper.quotate(ciudad) + ",";
-        strPairs += "codigopostal=" + EncodingUtilHelper.quotate(codigopostal) + ",";
+        strPairs += "codigopostal=" + EncodingUtilHelper.quotate(codigo_postal) + ",";
         strPairs += "provincia=" + EncodingUtilHelper.quotate(provincia) + ",";
         strPairs += "pais=" + EncodingUtilHelper.quotate(pais) + ",";
         strPairs += "email=" + EncodingUtilHelper.quotate(email) + ",";
         strPairs += "telefono=" + EncodingUtilHelper.quotate(telefono) + ",";
-        strPairs += "id_tipousuario=" + id_tipousuario + ",";
-        strPairs += "id_medico=" + id_medico;
+        strPairs += "id_tipousuario=" + id_tipousuario;
+//        strPairs += "id_medico=" + id_medico;
         return strPairs;
     }
 
@@ -297,13 +297,13 @@ public class UsuarioBean implements GenericBean {
         this.setId(oResultSet.getInt("id"));
         this.setDni(oResultSet.getString("dni"));
         this.setNombre(oResultSet.getString("nombre"));
-        this.setPrimerapellido(oResultSet.getString("primerapellido"));
-        this.setSegundoapellido(oResultSet.getString("segundoapellido"));
+        this.setPrimerapellido(oResultSet.getString("apellido1"));
+        this.setSegundoapellido(oResultSet.getString("apellido2"));
         this.setLogin(oResultSet.getString("login"));
         this.setPassword(oResultSet.getString("password"));
         this.setDireccion(oResultSet.getString("direccion"));
         this.setCiudad(oResultSet.getString("ciudad"));
-        this.setCodigopostal(oResultSet.getString("codigopostal"));
+        this.setCodigopostal(oResultSet.getString("codigo_postal"));
         this.setProvincia(oResultSet.getString("provincia"));
         this.setPais(oResultSet.getString("pais"));
         this.setEmail(oResultSet.getString("email"));
